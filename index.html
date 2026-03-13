@@ -1,48 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jayasinghe Tours & Car Rental</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 
 body{
-font-family: Arial;
 margin:0;
+font-family:Arial;
 background:#f4f4f4;
-text-align:center;
 }
 
 header{
-background:#0b3d91;
+background:#0a3d62;
 color:white;
+text-align:center;
 padding:20px;
 }
 
 header img{
-width:140px;
+width:130px;
+}
+
+nav{
+background:#222;
+padding:10px;
+text-align:center;
+}
+
+nav a{
+color:white;
+margin:10px;
+text-decoration:none;
+font-size:18px;
 }
 
 .hero{
-padding:80px 20px;
-background:#eee;
+background:url("https://images.unsplash.com/photo-1544735716-392fe2489ffa") center/cover;
+height:400px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+color:white;
+text-shadow:2px 2px 5px black;
 }
 
-button{
+.hero h1{
+font-size:40px;
+}
+
+.btn{
 background:#25D366;
-border:none;
 padding:15px 30px;
-font-size:18px;
 border-radius:5px;
 color:white;
+text-decoration:none;
+font-size:18px;
 }
 
 .section{
-padding:40px;
+padding:60px 20px;
+text-align:center;
+}
+
+.cards{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+width:250px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+footer{
+background:#111;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+padding:15px;
+border-radius:50%;
+font-size:22px;
+color:white;
+text-decoration:none;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -51,47 +109,120 @@ padding:40px;
 
 <img src="logo.png">
 
-<h1>Jayasinghe Tours & Car Rental</h1>
+<h2>Jayasinghe Tours & Car Rental</h2>
 
 <p>Explore Sri Lanka With Trusted Local Travel Partner</p>
 
 </header>
 
-<div class="hero">
+<nav>
 
-<h2>Car Rental Starting From $35 USD</h2>
+<a href="#">Home</a>
+<a href="#cars">Vehicles</a>
+<a href="#tours">Tours</a>
+<a href="#contact">Contact</a>
 
-<p>Airport Pickup | Sri Lanka Tours | Car Rental</p>
+</nav>
 
-<a href="https://wa.me/94787077007">
+<section class="hero">
 
-<button>Book via WhatsApp</button>
+<h1>Discover Beautiful Sri Lanka</h1>
 
-</a>
+<p>Car Rental Starting From $35 USD</p>
 
-</div>
+<br>
 
-<div class="section">
+<a class="btn" href="https://wa.me/94787077007">Book via WhatsApp</a>
+
+</section>
+
+<section class="section" id="cars">
 
 <h2>Our Vehicles</h2>
 
-<p>Suzuki Wagon R</p>
+<div class="cards">
 
-<p>Sedan Cars</p>
+<div class="card">
 
-<p>Family Vehicles</p>
+<h3>Suzuki Wagon R</h3>
+
+<p>Comfortable and fuel efficient</p>
 
 </div>
 
-<div class="section">
+<div class="card">
 
-<h2>Contact</h2>
+<h3>Sedan Cars</h3>
+
+<p>Perfect for city tours</p>
+
+</div>
+
+<div class="card">
+
+<h3>Family Vehicles</h3>
+
+<p>Best for long journeys</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="tours">
+
+<h2>Popular Sri Lanka Tours</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Sigiriya Rock Fortress</h3>
+
+</div>
+
+<div class="card">
+
+<h3>Kandy Temple Tour</h3>
+
+</div>
+
+<div class="card">
+
+<h3>Ella Scenic Tour</h3>
+
+</div>
+
+<div class="card">
+
+<h3>Yala Safari</h3>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="contact">
+
+<h2>Contact Us</h2>
 
 <p>📞 +94 787 077 007</p>
 
 <p>Sri Lanka</p>
 
-</div>
+<a class="btn" href="https://wa.me/94787077007">Chat on WhatsApp</a>
+
+</section>
+
+<footer>
+
+<p>© 2026 Jayasinghe Tours & Car Rental</p>
+
+</footer>
+
+<a class="whatsapp" href="https://wa.me/94787077007">💬</a>
 
 </body>
 </html>
