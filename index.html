@@ -3,36 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jayasinghe Tours & Car Rental: Sri Lanka car with driver and tailor-made tours.">
   <title>Jayasinghe Tours | Sri Lanka Car Rental & Tours</title>
   <link rel="stylesheet" href="style.css">
+  
+  <link rel="canonical" href="https://jayasinghetours.github.io/" />
+  <meta property="og:title" content="Jayasinghe Tours | Sri Lanka Car Rental" />
+  <meta property="og:image" content="https://jayasinghetours.github.io/logo.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Jayasinghe Tours & Car Rental",
+    "telephone": "+94787077007",
+    "address": { "@type": "PostalAddress", "addressLocality": "Katana", "addressCountry": "LK" }
+  }
+  </script>
 </head>
 <body>
 
 <nav class="navbar">
-  <a href="#" class="navbar-brand"><h2>Jayasinghe Tours</h2></a>
+  <a href="#" class="navbar-brand">
+    <img src="https://jayasinghetours.github.io/logo.png" alt="Logo">
+    <h2>Jayasinghe Tours</h2>
+  </a>
   <div class="nav-links">
-    <a href="#cars">Cars</a>
+    <a href="#">Home</a>
+    <a href="#cars">Fleet</a>
     <a href="#tours">Tours</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
 
-<section class="section" id="cars">
-  <h2>Our Fleet</h2>
-  <div class="cards">
-    <div class="card" onclick="openModal('wagonr')">
-      <img src="https://github.com/T-N-S-01/Car-Rental-Tourist-web-/blob/main/src/assets/img/wagonr3.jpg?raw=true" alt="Suzuki Wagon R">
-      <div class="card-content"><h3>Suzuki Wagon R</h3></div>
-    </div>
+<header class="hero-slider">
+  <div class="slide active-slide" style="background-image: url('https://raw.githubusercontent.com/Jayasinghetours/jayasinghetours.github.io/refs/heads/main/Carrent.jpg');">
+    <div class="slide-content"><h1>Car Rental in Sri Lanka</h1><p>Premium driver-guides • Unlimited miles</p><a href="https://wa.me/94787077007" class="hero-btn">🚗 Book Now</a></div>
   </div>
-</section>
+  <div class="slide" style="background-image: url('https://github.com/T-N-S-01/Car-Rental-Tourist-web-/blob/main/src/assets/img/Sri-Dalada-Maligawa-Temple-of-the-Tooth-Relic.jpg?raw=true');">
+    <div class="slide-content"><h1>Explore Sri Lanka</h1><p>Sigiriya • Kandy • Ella • Yala</p><a href="#tours" class="hero-btn">🏝️ View Tours</a></div>
+  </div>
+  <span class="slider-arrow prev" onclick="changeHeroSlide(-1)">&#10094;</span>
+  <span class="slider-arrow next" onclick="changeHeroSlide(1)">&#10095;</span>
+</header>
 
-<section class="section" id="tours">
-  <h2>Sri Lanka Tours</h2>
+<section class="section" id="cars">
+  <h2 class="reveal">Our Premium Fleet</h2>
   <div class="cards">
-    <div class="card" onclick="openModal('sigiriya')">
-      <img src="https://images.unsplash.com/photo-1588598198321-97368dcf0456?q=80" alt="Sigiriya">
-      <div class="card-content"><h3>Sigiriya</h3></div>
+    <div class="card reveal" onclick="openModal('wagonr')">
+      <img src="https://github.com/T-N-S-01/Car-Rental-Tourist-web-/blob/main/src/assets/img/wagonr3.jpg?raw=true" alt="Wagon R" loading="lazy">
+      <div class="card-content"><h3>Suzuki Wagon R</h3><p>Compact & Fuel Efficient</p></div>
+    </div>
+    <div class="card reveal" onclick="openModal('axio')">
+      <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80" alt="Axio" loading="lazy">
+      <div class="card-content"><h3>Toyota Axio</h3><p>Comfortable Sedan</p></div>
     </div>
   </div>
 </section>
@@ -48,9 +72,20 @@
       <span class="gallery-arrow gallery-prev" onclick="moveGallery('wagonr', -1)">&#10094;</span>
       <span class="gallery-arrow gallery-next" onclick="moveGallery('wagonr', 1)">&#10095;</span>
     </div>
-    <h2>Suzuki Wagon R</h2>
+    <div class="modal-details">
+      <h2>Suzuki Wagon R</h2>
+      <p>Perfect for small families and long trips. Hybrid technology.</p>
+      <a href="https://wa.me/94787077007" class="btn">Book via WhatsApp</a>
+    </div>
   </div>
 </div>
+
+<footer class="section" id="contact">
+  <h2>Contact Jayasinghe Tours</h2>
+  <p>Available 24/7: +94 787 077 007</p>
+</footer>
+
+<a class="whatsapp" href="https://wa.me/94787077007">💬 Chat with Us</a>
 
 <script src="script.js"></script>
 </body>
