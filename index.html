@@ -1,129 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jayasinghe Tours & Car Rental</title>
-<style>
-/* Global Styles & Smooth Scrolling */
-html {scroll-behavior: smooth;}
-body{margin:0;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background:#f8f9fa;color:#333; overflow-x: hidden;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SEO Meta Tags (focus Sri Lanka tours, car rental) -->
+  <meta name="description" content="Jayasinghe Tours & Car Rental: Sri Lanka car with driver, rent a car Sri Lanka, car rental, Sri Lanka tours. Reliable, local driver guides, best fleet.">
+  <meta name="keywords" content="Srilanka tours, Car rental in Srilanka, Srilankacarwithdriver, rent a car srilanka, carrental, Sri Lanka taxi, driver guide, Sigiriya, Kandy">
+  <meta name="author" content="Jayasinghe Tours">
+  <title>Jayasinghe Tours | Sri Lanka Car Rental & Tours</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      background: #f4f7fb;
+      color: #1e2a3a;
+      overflow-x: hidden;
+    }
 
-/* Professional Sticky Navigation Bar (One Line) */
-.navbar {
-  background: #0a3d62;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.navbar-brand {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  text-decoration: none;
-  color: white;
-}
-.navbar-brand img {width: 50px; border-radius: 5px;}
-.navbar-brand h2 {margin: 0; font-size: 22px; letter-spacing: 1px;}
-.nav-links {
-  display: flex;
-  gap: 25px;
-}
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: color 0.3s;
-}
-.nav-links a:hover {color: #25D366;}
+    /* ----- professional navbar (compact) ----- */
+    .navbar {
+      background: #0a2e4d;
+      background: linear-gradient(135deg, #0a2e4d 0%, #134b73 100%);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1500;
+      box-shadow: 0 6px 15px rgba(0,20,30,0.2);
+    }
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+    }
+    .navbar-brand img {
+      width: 44px; 
+      height: 44px; 
+      background: #ffb347; 
+      border-radius: 50%;
+      object-fit: cover; 
+      border: 2px solid white;
+    }
+    .navbar-brand h2 { margin: 0; font-size: 1.5rem; font-weight: 600; letter-spacing: 1px; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      color: white; text-decoration: none; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.95rem;
+      transition: 0.25s; border-bottom: 2px solid transparent; padding-bottom: 4px;
+    }
+    .nav-links a:hover { border-bottom-color: #ffb347; color: #ffd966; }
 
-/* Hero Section with Sri Lanka Tourism Image */
-.hero{
-  background:linear-gradient(rgba(10, 61, 98, 0.6), rgba(0, 0, 0, 0.6)), url("https://images.unsplash.com/photo-1546890975-7596e98cdbf1?q=80&w=1920&auto=format&fit=crop") center/cover no-repeat;
-  height: 85vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  color:white;
-  text-align: center;
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
-}
-.hero h1{font-size:60px;margin:0; padding: 0 20px; font-weight: 800;}
-.hero p{font-size: 24px; margin-top: 15px; font-weight: 300; letter-spacing: 1px;}
+    /* ----- hero slider (full width, modern) ----- */
+    .hero-slider {
+      position: relative;
+      height: 90vh;
+      max-height: 750px;
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      background-size: cover;
+      background-position: center 30%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.7);
+    }
+    .slide.active-slide { opacity: 1; z-index: 10; }
+    .slide::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(45deg, rgba(0,40,60,0.65) 0%, rgba(0,20,30,0.4) 100%);
+    }
+    .slide-content {
+      position: relative; z-index: 20; max-width: 900px; padding: 20px;
+      animation: fadeUp 1s ease-out;
+    }
+    .slide-content h1 { font-size: clamp(2.8rem, 8vw, 5.5rem); font-weight: 800; margin: 0 0 15px; line-height: 1.1; }
+    .slide-content p { font-size: clamp(1.2rem, 3vw, 2rem); font-weight: 300; margin-bottom: 25px; }
+    .hero-btn {
+      background: #25D366; border: none; padding: 16px 42px; border-radius: 50px;
+      color: white; font-weight: 700; font-size: 1.3rem; text-decoration: none;
+      display: inline-block; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+      transition: 0.3s; border: 2px solid transparent;
+    }
+    .hero-btn:hover { background: #128C7E; transform: translateY(-5px); box-shadow: 0 15px 30px rgba(18,140,126,0.5); }
 
-/* Buttons */
-.btn{background:#25D366;padding:15px 35px;border-radius:30px;color:white;text-decoration:none;font-size:18px;font-weight:bold;transition:all 0.3s; display: inline-block; margin-top: 25px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);}
-.btn:hover{background:#128C7E; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(18, 140, 126, 0.5);}
+    /* slider navigation arrows */
+    .slider-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 30;
+      background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
+      color: white; font-size: 2.8rem; padding: 12px 25px; cursor: pointer;
+      border-radius: 60px; border: 1px solid rgba(255,255,255,0.6); transition: 0.3s;
+    }
+    .slider-arrow:hover { background: rgba(255,255,255,0.5); color: #0a2e4d; }
+    .prev { left: 30px; }
+    .next { right: 30px; }
 
-/* Scroll Reveal Classes */
-.reveal {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.8s ease-out;
-}
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
+    /* slide indicators (dots) */
+    .dots-container {
+      position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); z-index: 30;
+      display: flex; gap: 14px;
+    }
+    .dot {
+      width: 16px; height: 16px; background: rgba(255,255,255,0.5); border-radius: 50%;
+      cursor: pointer; transition: 0.3s; border: 2px solid transparent;
+    }
+    .dot.active-dot { background: #ffb347; transform: scale(1.3); border-color: white; }
 
-/* Sections & Cards */
-.section{padding:90px 20px;text-align:center;}
-.section h2 {font-size: 38px; margin-bottom: 50px; color: #0a3d62; position: relative; display: inline-block;}
-.section h2::after {content: ''; width: 50px; height: 4px; background: #25D366; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); border-radius: 2px;}
+    /* ----- general sections ----- */
+    .section { padding: 90px 20px; text-align: center; }
+    .section h2 {
+      font-size: 2.8rem; margin-bottom: 20px; color: #0a3d62;
+      display: inline-block; position: relative;
+    }
+    .section h2:after {
+      content: ''; display: block; width: 80px; height: 4px; background: #ffb347;
+      margin: 15px auto 0; border-radius: 3px;
+    }
+    .cards {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 35px; margin-top: 50px;
+    }
+    .card {
+      background: white; width: 300px; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+      transition: 0.4s; cursor: pointer; overflow: hidden; border: 1px solid rgba(0,0,0,0.03);
+    }
+    .card:hover { transform: translateY(-16px) scale(1.02); box-shadow: 0 25px 45px rgba(0,40,60,0.2); }
+    .card img { width: 100%; height: 220px; object-fit: cover; transition: 0.6s; }
+    .card:hover img { transform: scale(1.08); }
+    .card-content { padding: 22px 18px; }
+    .card h3 { margin: 0 0 8px; color: #0a2e4d; font-size: 1.6rem; }
+    .card p { color: #4a5f73; font-size: 1rem; }
 
-.cards{display:flex;flex-wrap:wrap;justify-content:center;gap:35px;}
-.card{background:white;width:300px;border-radius:12px;box-shadow:0 8px 25px rgba(0,0,0,0.08);transition:transform 0.4s, box-shadow 0.4s;cursor:pointer; overflow: hidden;}
-.card:hover{transform:translateY(-12px);box-shadow:0 15px 35px rgba(0,0,0,0.15);}
-.card img{width:100%; height: 200px; object-fit: cover; transition: transform 0.5s;}
-.card:hover img{transform: scale(1.05);}
-.card-content {padding: 20px;}
-.card h3{margin: 0 0 10px 0; color: #111; font-size: 22px;}
-.card p{margin: 0; color: #666; font-size: 15px;}
+    /* modals (unchanged, but refined) */
+    .modal {
+      display: none; position: fixed; z-index: 2000; padding-top: 60px; left: 0; top: 0;
+      width: 100%; height: 100%; overflow: auto; background: rgba(0,20,30,0.9);
+      backdrop-filter: blur(10px);
+    }
+    .modal-content {
+      background: white; margin: auto; padding: 35px; border-radius: 30px;
+      width: 90%; max-width: 700px; animation: zoomIn 0.4s; text-align: left;
+      box-shadow: 0 40px 70px rgba(0,0,0,0.5);
+    }
+    .modal-content img { width: 100%; border-radius: 18px; max-height: 380px; object-fit: cover; }
+    .modal-content h2 { color: #0a2e4d; font-size: 2rem; margin-top: 20px; }
+    .price-tag { background: #fef0e6; color: #c44536; font-size: 1.5rem; padding: 8px 25px; border-radius: 40px; display: inline-block; font-weight: 700; margin: 15px 0; }
+    .policy-list { background: #f0f5fa; padding: 20px; border-radius: 24px; margin: 20px 0; }
+    .close { position: absolute; top: 25px; right: 35px; font-size: 3rem; color: #aaa; cursor: pointer; transition: 0.2s; }
+    .close:hover { color: #e74c3c; }
 
-/* Modals */
-.modal{display:none;position:fixed;z-index:2000;padding-top:60px;left:0;top:0;width:100%;height:100%;overflow:auto;background:rgba(0,0,0,0.85); backdrop-filter: blur(8px);}
-.modal-content{background:white;margin:auto;padding:35px;border-radius:15px;width:90%;max-width:650px;animation:zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: left; position: relative;}
-.modal-content img{width:100%;border-radius:10px;margin-bottom:20px; height: 350px; object-fit: cover;}
-.modal-content h2{margin-top: 0; color: #0a3d62; font-size: 28px;}
-.price-tag {font-size: 24px; font-weight: bold; color: #e15f41; margin: 15px 0; display: inline-block; background: #fcebeb; padding: 8px 15px; border-radius: 5px;}
-.policy-list {background: #f1f2f6; padding: 20px; border-radius: 8px; margin-bottom: 25px;}
-.policy-list ul {margin: 10px 0 0 0; padding-left: 20px; line-height: 1.6;}
-.close{position: absolute; top: 15px; right: 25px; color:#aaa; font-size:35px; font-weight:bold; cursor:pointer; line-height: 1; transition: color 0.3s;}
-.close:hover{color:#e74c3c;}
+    /* contact & footer */
+    .contact-info { font-size: 1.2rem; margin: 12px 0; color: #1e3c5a; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    footer { background: #0a2e4d; color: white; text-align: center; padding: 35px; font-size: 1.1rem; }
 
-/* Footer & Contact */
-.contact-info {font-size: 18px; margin: 15px 0; color: #555;}
-.contact-info i {margin-right: 10px;}
-footer{background:#0a3d62;color:#fff;text-align:center;padding:30px;}
-.whatsapp{position:fixed;bottom:30px;right:30px;background:#25D366;padding:15px 25px;border-radius:50px;font-size:20px;font-weight: bold; color:white;text-decoration:none;z-index:1000; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5); transition: transform 0.3s; display: flex; align-items: center; gap: 10px;}
-.whatsapp:hover{transform: scale(1.08);}
+    /* floating whatsapp */
+    .whatsapp {
+      position: fixed; bottom: 30px; right: 30px; background: #25D366; padding: 16px 30px;
+      border-radius: 60px; font-weight: 700; color: white; text-decoration: none;
+      z-index: 1000; box-shadow: 0 8px 25px rgba(37,211,102,0.5); display: flex; align-items: center; gap: 12px;
+      font-size: 1.2rem; transition: 0.3s; border: 2px solid white;
+    }
+    .whatsapp:hover { transform: scale(1.1); background: #20b859; }
 
-/* Animations */
-@keyframes zoomIn {from{opacity:0; transform: scale(0.9);} to{opacity:1; transform: scale(1);}}
+    /* reveal animation */
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .navbar {flex-direction: column; padding: 15px;}
-  .nav-links {margin-top: 15px; flex-wrap: wrap; justify-content: center;}
-  .hero h1 {font-size: 40px;}
-}
-</style>
+    @keyframes zoomIn { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+    @keyframes fadeUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+
+    /* mobile */
+    @media (max-width: 800px) {
+      .navbar { flex-direction: column; padding: 15px; gap: 10px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 18px; }
+      .slider-arrow { font-size: 2rem; padding: 8px 18px; }
+    }
+    @media (max-width: 550px) {
+      .slide-content h1 { font-size: 2.2rem; }
+    }
+  </style>
 </head>
 <body>
 
+<!-- Professional sticky nav (clean) -->
 <div class="navbar">
   <a href="#" class="navbar-brand">
-    <img src="logo.png" alt="Logo">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23ffb347'/%3E%3Ctext x='28' y='70' font-size='50' fill='%230a2e4d' font-weight='bold'%3EJ%3C/text%3E%3C/svg%3E" alt="Logo">
     <h2>Jayasinghe Tours</h2>
   </a>
   <div class="nav-links">
@@ -134,198 +207,161 @@ footer{background:#0a3d62;color:#fff;text-align:center;padding:30px;}
   </div>
 </div>
 
-<section class="hero">
-<h1>Experience the True Beauty of Sri Lanka</h1>
-<p>Reliable Car Rentals & Unforgettable Local Tours</p>
-<a class="btn" href="https://wa.me/94787077007">Book via WhatsApp</a>
-</section>
+<!-- HERO SECTION with PROFESSIONAL SLIDER (Sri Lanka travel focus) -->
+<div class="hero-slider">
+  <!-- Slide 1 (car rental focus) -->
+  <div class="slide active-slide" id="slide1" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop');">
+    <div class="slide-content">
+      <h1>Car Rental in Sri Lanka</h1>
+      <p>with premium driver-guides • unlimited miles • free wifi</p>
+      <a href="https://wa.me/94787077007" class="hero-btn">🚗 Book your ride</a>
+    </div>
+  </div>
+  <!-- Slide 2 (tours) -->
+  <div class="slide" id="slide2" style="background-image: url('https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?q=80&w=2070&auto=format&fit=crop');">
+    <div class="slide-content">
+      <h1>Sri Lanka Tours</h1>
+      <p>Sigiriya • Kandy • Ella • Yala — all inclusive</p>
+      <a href="#tours" class="hero-btn">🏝️ Explore tours</a>
+    </div>
+  </div>
+  <!-- Slide 3 (car with driver / rent a car) -->
+  <div class="slide" id="slide3" style="background-image: url('https://images.unsplash.com/photo-1609951651556-5334e2706168?q=80&w=1974&auto=format&fit=crop');">
+    <div class="slide-content">
+      <h1>SriLankaCarWithDriver</h1>
+      <p>Local experts • safe & reliable • airport pickup</p>
+      <a href="https://wa.me/94787077007" class="hero-btn">🧳 Get a driver</a>
+    </div>
+  </div>
 
+  <!-- slider arrows -->
+  <span class="slider-arrow prev" onclick="changeSlide(-1)">&#10094;</span>
+  <span class="slider-arrow next" onclick="changeSlide(1)">&#10095;</span>
+
+  <!-- dots -->
+  <div class="dots-container">
+    <span class="dot active-dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+  </div>
+</div>
+
+<!-- FLEET SECTION (cars) with seo context -->
 <section class="section" id="cars">
-<h2 class="reveal">Our Fleet</h2>
-<div class="cards">
-<div class="card reveal" onclick="openModal('wagonr')">
-<img src="https://Jayasinghetours.github.io/SusukiWagonR.jpg" alt="Suzuki Wagon R">
-<div class="card-content">
-  <h3>Suzuki Wagon R</h3>
-  <p>Compact, comfortable & highly fuel-efficient.</p>
-</div>
-</div>
-
-<div class="card reveal" onclick="openModal('axio')">
-<img src="https://images.unsplash.com/photo-1590362891991-f776e747a588?q=80&w=800&auto=format&fit=crop" alt="Toyota Axio">
-<div class="card-content">
-  <h3>Toyota Axio</h3>
-  <p>Premium comfort for longer journeys.</p>
-</div>
-</div>
-</div>
+  <h2 class="reveal">Our Fleet • Car rental Sri Lanka</h2>
+  <div class="cards">
+    <div class="card reveal" onclick="openModal('wagonr')">
+      <img src="https://images.unsplash.com/photo-1617469165786-8007eda3caa7?q=80&w=800&auto=format&fit=crop" alt="Suzuki Wagon R Sri Lanka">
+      <div class="card-content"><h3>Suzuki Wagon R</h3><p>Compact • fuel-saver • perfect for city & short tours</p></div>
+    </div>
+    <div class="card reveal" onclick="openModal('axio')">
+      <img src="https://images.unsplash.com/photo-1621021544264-0218d6e9ae29?q=80&w=800&auto=format&fit=crop" alt="Toyota Axio car rental">
+      <div class="card-content"><h3>Toyota Axio</h3><p>Spacious sedan • ideal for families & long distance</p></div>
+    </div>
+    <!-- one more car to imply variety -->
+    <div class="card reveal" onclick="openModal('aqua')">
+      <img src="https://images.unsplash.com/photo-1618842676087-cf12ad5e9155?q=80&w=800&auto=format&fit=crop" alt="Toyota Aqua hybrid">
+      <div class="card-content"><h3>Toyota Aqua</h3><p>Hybrid • eco • automatic with driver</p></div>
+    </div>
+  </div>
 </section>
 
+<!-- TOURS SECTION  (popular) -->
 <section class="section" id="tours">
-<h2 class="reveal">Popular Sri Lanka Tours</h2>
-<div class="cards">
-<div class="card reveal" onclick="openModal('sigiriya')">
-  <img src="https://images.unsplash.com/photo-1588598198321-97368dcf0456?q=80&w=800&auto=format&fit=crop" alt="Sigiriya">
-  <div class="card-content">
-    <h3>Sigiriya Rock Fortress</h3>
-    <p>The ancient lion rock palace.</p>
+  <h2 class="reveal">Sri Lanka Tours with driver</h2>
+  <div class="cards">
+    <div class="card reveal" onclick="openModal('sigiriya')"><img src="https://images.unsplash.com/photo-1588598198321-97368dcf0456?q=80&w=800&auto=format&fit=crop" alt="Sigiriya Rock"><div class="card-content"><h3>Sigiriya</h3><p>Ancient fortress & frescoes</p></div></div>
+    <div class="card reveal" onclick="openModal('kandy')"><img src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?q=80&w=800&auto=format&fit=crop" alt="Kandy Temple"><div class="card-content"><h3>Kandy</h3><p>Temple of Tooth, cultural show</p></div></div>
+    <div class="card reveal" onclick="openModal('ella')"><img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800&auto=format&fit=crop" alt="Ella Sri Lanka"><div class="card-content"><h3>Ella</h3><p>Nine Arches, tea country</p></div></div>
+    <div class="card reveal" onclick="openModal('yala')"><img src="https://images.unsplash.com/photo-1544181093-c712fbca8073?q=80&w=800&auto=format&fit=crop" alt="Yala leopard"><div class="card-content"><h3>Yala Safari</h3><p>Leopards & elephants</p></div></div>
   </div>
-</div>
-<div class="card reveal" onclick="openModal('kandy')">
-  <img src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?q=80&w=800&auto=format&fit=crop" alt="Kandy Temple">
-  <div class="card-content">
-    <h3>Kandy Temple Tour</h3>
-    <p>Cultural heart of the island.</p>
-  </div>
-</div>
-<div class="card reveal" onclick="openModal('ella')">
-  <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800&auto=format&fit=crop" alt="Ella">
-  <div class="card-content">
-    <h3>Ella Scenic Tour</h3>
-    <p>Lush mountains and tea estates.</p>
-  </div>
-</div>
-<div class="card reveal" onclick="openModal('yala')">
-  <img src="https://images.unsplash.com/photo-1544181093-c712fbca8073?q=80&w=800&auto=format&fit=crop" alt="Yala Safari">
-  <div class="card-content">
-    <h3>Yala Safari</h3>
-    <p>Thrilling wildlife adventure.</p>
-  </div>
-</div>
-</div>
 </section>
 
-<div id="wagonr" class="modal">
-<div class="modal-content">
-<span class="close" onclick="closeModal('wagonr')">&times;</span>
-<img src="https://images.unsplash.com/photo-1617469165786-8007eda3caa7?q=80&w=800&auto=format&fit=crop" alt="Suzuki Wagon R">
-<h2>Suzuki Wagon R</h2>
-<p>The perfect economical hatchback for navigating city streets and coastal routes with excellent fuel efficiency.</p>
-<div class="price-tag">Message for Pricing</div>
-<div class="policy-list">
-  <strong>Vehicle Rental Policies:</strong>
-  <ul>
-    <li>Unlimited mileage included.</li>
-    <li>Strictly no smoking or alcohol inside the vehicle.</li>
-    <li>Not permitted for driving inside rugged safari parks.</li>
-  </ul>
-</div>
-<a class="btn" href="https://wa.me/94787077007?text=Hello,%20I%20want%20to%20inquire%20about%20renting%20the%20Suzuki%20Wagon%20R">Inquire Now</a>
-</div>
-</div>
+<!-- MODALS (details) -->
+<!-- Wagon R -->
+<div id="wagonr" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('wagonr')">&times;</span><img src="https://images.unsplash.com/photo-1617469165786-8007eda3caa7?q=80&w=800&auto=format&fit=crop" alt="Suzuki Wagon R"><h2>Suzuki Wagon R</h2><p>Ideal for up to 4 pax. Great mileage. A/C, clean, hand-free driving with our English-speaking driver.</p><div class="price-tag">from $45/day</div><div class="policy-list"><strong>Rental policies:</strong><ul><li>unlimited km</li><li>driver included</li><li>no smoking</li></ul></div><a class="btn" href="https://wa.me/94787077007?text=Hello%2C%20I%20want%20to%20inquire%20about%20Suzuki%20Wagon%20R%20car%20rental%20Sri%20Lanka">Inquire on WhatsApp</a></div></div>
+<!-- Axio -->
+<div id="axio" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('axio')">&times;</span><img src="https://images.unsplash.com/photo-1621021544264-0218d6e9ae29?q=80&w=800&auto=format&fit=crop" alt="Toyota Axio"><h2>Toyota Axio</h2><p>Spacious sedan, 4+1, smooth ride for hill country or coastal tours. Driver provided.</p><div class="price-tag">from $65/day</div><div class="policy-list"><strong>included:</strong> driver, fuel, parking.</div><a class="btn" href="https://wa.me/94787077007?text=Hello%2C%20I%20need%20Toyota%20Axio%20with%20driver%20in%20Sri%20Lanka">Inquire now</a></div></div>
+<!-- Aqua (extra) -->
+<div id="aqua" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('aqua')">&times;</span><img src="https://images.unsplash.com/photo-1618842676087-cf12ad5e9155?q=80&w=800&auto=format&fit=crop" alt="Toyota Aqua"><h2>Toyota Aqua Hybrid</h2><p>Eco-friendly, silent ride, excellent fuel economy. Full hybrid with professional driver.</p><div class="price-tag">from $55/day</div><div class="policy-list"><ul><li>hybrid technology</li><li>free wifi</li></ul></div><a class="btn" href="https://wa.me/94787077007?text=Interested%20in%20Toyota%20Aqua%20rental">Chat</a></div></div>
+<!-- tour modals -->
+<div id="sigiriya" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('sigiriya')">&times;</span><img src="https://images.unsplash.com/photo-1588598198321-97368dcf0456?q=80&w=800&auto=format&fit=crop" alt="Sigiriya"><h2>Sigiriya Rock Tour</h2><p>Full day with driver-guide. Includes entrance, water. Start from Negombo/Colombo.</p><a class="btn" href="https://wa.me/94787077007?text=Hello%2C%20I%20want%20to%20book%20Sigiriya%20tour">Book tour</a></div></div>
+<div id="kandy" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('kandy')">&times;</span><img src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?q=80&w=800&auto=format&fit=crop" alt="Kandy"><h2>Kandy Cultural Tour</h2><p>Temple of the Tooth, botanical garden, cultural show. With driver.</p><a class="btn" href="https://wa.me/94787077007?text=Interested%20in%20Kandy%20tour">Inquire</a></div></div>
+<div id="ella" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('ella')">&times;</span><img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800&auto=format&fit=crop" alt="Ella"><h2>Ella Escape</h2><p>2 days / 1 night package, scenic train, Nine Arches, Little Adam's Peak.</p><a class="btn" href="https://wa.me/94787077007?text=Ella%20tour%20package%20inquiry">Check prices</a></div></div>
+<div id="yala" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('yala')">&times;</span><img src="https://images.unsplash.com/photo-1544181093-c712fbca8073?q=80&w=800&auto=format&fit=crop" alt="Yala"><h2>Yala Safari</h2><p>Morning jeep safari with packed breakfast, experienced tracker. 4x4 included.</p><a class="btn" href="https://wa.me/94787077007?text=Hello%2C%20I%20need%20Yala%20safari%20with%20driver">Book safari</a></div></div>
 
-<div id="axio" class="modal">
-<div class="modal-content">
-<span class="close" onclick="closeModal('axio')">&times;</span>
-<img src="https://images.unsplash.com/photo-1590362891991-f776e747a588?q=80&w=800&auto=format&fit=crop" alt="Toyota Axio">
-<h2>Toyota Axio</h2>
-<p>A spacious, smooth-riding sedan that provides exceptional comfort for families and extensive island tours.</p>
-<div class="price-tag">Message for Pricing</div>
-<div class="policy-list">
-  <strong>Vehicle Rental Policies:</strong>
-  <ul>
-    <li>Unlimited mileage included.</li>
-    <li>Strictly no smoking or alcohol inside the vehicle.</li>
-    <li>Not permitted for driving inside rugged safari parks.</li>
-  </ul>
-</div>
-<a class="btn" href="https://wa.me/94787077007?text=Hello,%20I%20want%20to%20inquire%20about%20renting%20the%20Toyota%20Axio">Inquire Now</a>
-</div>
-</div>
-
-<div id="sigiriya" class="modal">
-<div class="modal-content">
-<span class="close" onclick="closeModal('sigiriya')">&times;</span>
-<img src="https://images.unsplash.com/photo-1588598198321-97368dcf0456?q=80&w=800&auto=format&fit=crop" alt="Sigiriya">
-<h2>Sigiriya Rock Fortress</h2>
-<p>Explore the famous Lion Rock Fortress, a UNESCO World Heritage site, offering breathtaking panoramic views and ancient frescoes.</p>
-<a class="btn" href="https://wa.me/94787077007?text=Hello,%20I%20am%20interested%20in%20the%20Sigiriya%20Tour">Book Tour</a>
-</div>
-</div>
-
-<div id="kandy" class="modal">
-<div class="modal-content">
-<span class="close" onclick="closeModal('kandy')">&times;</span>
-<img src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?q=80&w=800&auto=format&fit=crop" alt="Kandy Temple">
-<h2>Kandy Temple Tour</h2>
-<p>Visit the revered Temple of the Sacred Tooth Relic, experience local traditional dances, and walk around the serene Kandy lake.</p>
-<a class="btn" href="https://wa.me/94787077007?text=Hello,%20I%20am%20interested%20in%20the%20Kandy%20Tour">Book Tour</a>
-</div>
-</div>
-
-<div id="ella" class="modal">
-<div class="modal-content">
-<span class="close" onclick="closeModal('ella')">&times;</span>
-<img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800&auto=format&fit=crop" alt="Ella">
-<h2>Ella Scenic Tour</h2>
-<p>Immerse yourself in lush green tea plantations, hike Little Adam's Peak, and witness the architectural marvel of the Nine Arches Bridge.</p>
-<a class="btn" href="https://wa.me/94787077007?text=Hello,%20I%20am%20interested%20in%20the%20Ella%20Tour">Book Tour</a>
-</div>
-</div>
-
-<div id="yala" class="modal">
-<div class="modal-content">
-<span class="close" onclick="closeModal('yala')">&times;</span>
-<img src="https://images.unsplash.com/photo-1544181093-c712fbca8073?q=80&w=800&auto=format&fit=crop" alt="Yala Safari">
-<h2>Yala Safari</h2>
-<p>Embark on an unforgettable jeep safari in Yala National Park, globally renowned for its high density of majestic leopards and wild elephants.</p>
-<a class="btn" href="https://wa.me/94787077007?text=Hello,%20I%20am%20interested%20in%20the%20Yala%20Safari">Book Tour</a>
-</div>
-</div>
-
+<!-- CONTACT SECTION -->
 <section class="section reveal" id="contact">
-<h2>Contact Us</h2>
-<div class="contact-info">📍 No 2 Jubilee Mw, Katana, Sri Lanka</div>
-<div class="contact-info">📞 +94 787 077 007</div>
-<div class="contact-info">✉️ contact@jayasinghetours.com</div>
-<br>
-<a class="btn" href="https://wa.me/94787077007">Chat on WhatsApp</a>
+  <h2>📞 Contact us 24/7</h2>
+  <div class="contact-info">📍 No 2 Jubilee Mw, Katana, Sri Lanka</div>
+  <div class="contact-info">📞 +94 787 077 007</div>
+  <div class="contact-info">✉️ booking@jayasinghetours.com</div>
+  <br>
+  <a class="btn" href="https://wa.me/94787077007" style="background:#0a3d62; color:white; box-shadow:none;">💬 WhatsApp now</a>
 </section>
 
 <footer>
-<p>© 2026 Jayasinghe Tours & Car Rental. All Rights Reserved.</p>
+  <p>© 2026 Jayasinghe Tours & Car Rental • Srilanka tours • Car rental in Srilanka • Srilankacarwithdriver • rent a car srilanka</p>
 </footer>
 
+<!-- floating whatsapp button -->
 <a class="whatsapp" href="https://wa.me/94787077007">💬 Chat With Us</a>
 
+<!-- JAVASCRIPT (slider, reveal, modals) -->
 <script>
-// Scroll Reveal Animation Logic
-function reveal() {
-  var reveals = document.querySelectorAll(".reveal");
-  for (var i = 0; i < reveals.length; i++) {
-    var windowHeight = window.innerHeight;
-    var elementTop = reveals[i].getBoundingClientRect().top;
-    var elementVisible = 100; // when to trigger the animation
-    if (elementTop < windowHeight - elementVisible) {
-      reveals[i].classList.add("active");
-    }
+  // ---------- SLIDER ----------
+  let slideIndex = 1;
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+
+  function showSlide(n) {
+    if (n > slides.length) slideIndex = 1;
+    if (n < 1) slideIndex = slides.length;
+    slides.forEach(s => s.classList.remove('active-slide'));
+    dots.forEach(d => d.classList.remove('active-dot'));
+    slides[slideIndex-1].classList.add('active-slide');
+    dots[slideIndex-1].classList.add('active-dot');
   }
-}
-window.addEventListener("scroll", reveal);
-reveal(); // Trigger on load
+  function changeSlide(step) { slideIndex += step; showSlide(slideIndex); }
+  function currentSlide(n) { slideIndex = n; showSlide(slideIndex); }
 
-// Modal functions
-function openModal(id){
-  document.getElementById(id).style.display="block";
-  document.body.style.overflow = "hidden"; // Prevent background scrolling
-}
-function closeModal(id){
-  document.getElementById(id).style.display="none";
-  document.body.style.overflow = "auto";
-}
+  // autoplay every 6 seconds
+  setInterval(() => { changeSlide(1); }, 6000);
 
-// Close modal when clicking outside
-window.onclick = function(event){
-  let modals = ['wagonr', 'axio', 'sigiriya', 'kandy', 'ella', 'yala'];
-  modals.forEach(id => {
-    let modal = document.getElementById(id);
-    if(event.target == modal){
-      modal.style.display="none";
-      document.body.style.overflow = "auto";
-    }
-  });
-}
+  // ---------- REVEAL ON SCROLL ----------
+  function reveal() {
+    document.querySelectorAll('.reveal').forEach(el => {
+      let windowHeight = window.innerHeight;
+      let elementTop = el.getBoundingClientRect().top;
+      if (elementTop < windowHeight - 90) el.classList.add('active');
+    });
+  }
+  window.addEventListener('scroll', reveal);
+  window.addEventListener('load', reveal);
+
+  // ---------- MODAL FUNCTIONS ----------
+  function openModal(id) {
+    document.getElementById(id).style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+  window.onclick = function(event) {
+    const modalIds = ['wagonr','axio','aqua','sigiriya','kandy','ella','yala'];
+    modalIds.forEach(id => {
+      let modal = document.getElementById(id);
+      if (event.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    });
+  };
+
+  // initial reveal and slider sync
+  reveal();
+  showSlide(1);
 </script>
-
 </body>
 </html>
