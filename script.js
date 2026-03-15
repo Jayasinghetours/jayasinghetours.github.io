@@ -1,59 +1,100 @@
-// HERO SLIDER
-let currentIdx = 0;
+// HERO SLIDER LOGIC
+let slideIndex = 0;
 const slides = document.querySelectorAll('.slide');
 const dots = document.querySelectorAll('.dot');
+let sliderInterval;
 
-function showSlides() {
-    slides.forEach((s, i) => {
-        s.classList.toggle('active-slide', i === currentIdx);
-        dots[i].classList.toggle('active-dot', i === currentIdx);
-    });
-    currentIdx = (currentIdx + 1) % slides.length;
-}
-setInterval(showSlides, 5000);
-
-// MODAL LOGIC
-function openModal(id) {
-    const modal = document.getElementById(id);
-    if(modal) {
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden'; // Stop scrolling background
-    }
+function showSlide(index) {
+  slides.forEach(s => s.classList.remove('active-slide'));
+  dots.forEach(d => d.classList.remove('active-dot'));
+  
+  slides[index].classList.add('active-slide');
+  dots[index].classList.add('active-dot');
 }
 
-function closeModal(id) {
-    const modal = document.getElementById(id);
-    if(modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
+function nextSlide() {
+  slideIndex = (slideIndex + 1) % slides.length;
+  showSlide(slideIndex);
 }
 
-// Close modal if clicking outside the box
+// Start auto-play
+sliderInterval = setInterval(nextSlide, 5000);
+
+// Allow manual dot clicking
+window.currentSlide = function(index) {
+  clearInterval(sliderInterval); // Pause auto-play when user clicks
+  slideIndex = index;
+  showSlide(slideIndex);
+  sliderInterval = setInterval(nextSlide, 5000); // Resume auto-play
+};
+
+// MODAL POPUP LOGIC
+window.openModal = function(id) {
+  const modal = document.getElementById(id);
+  if (modal) {
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Prevents background scrolling
+  }
+};
+
+window.closeModal = function(id) {
+  const modal = document.getElementById(id);
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Restores scrolling
+  }
+};
+
+// Close modal if user clicks the dark background outside the white box
 window.onclick = function(event) {
-    if (event.target.className === 'modal') {
-        event.target.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-}
+  if (event.target.classList.contains('modal')) {
+    event.target.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+};
 
-// BOOKING FORM
-function sendBooking(e) {
-    e.preventDefault();
-    const name = document.getElementById('name').value;
-    const date = document.getElementById('date').value;
-    const service = document.getElementById('service').value;
-    
-    const text = `Hello Jayasinghe Tours! I'm ${name}. I want to book a ${service} for ${date}.`;
-    const url = `https://wa.me/94787077007?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank');
-}
+// WHATSAPP BOOKING FORM LOGIC
+window.sendBooking = function(event) {
+  event.preventDefault(); // Prevents page reload
+  
+  const name = document.getElementById('name').value;
+  const date = document.getElementById('date').value;
+  const service = document.getElementById('service').value;
+  
+  // Create a clean WhatsApp message
+  const whatsappMessage = `Hello Jayasinghe Tours!%0A%0A` +
+                          `I would like to make an inquiry:%0A` +
+                          `*Name:* ${name}%0A` +
+                          `*Date:* ${date}%0A` +
+                          `*Service:* ${service}%0A%0A` +
+                          `Please let me know the availability.`;
+                          
+  // Your phone number
+  const phone = "94787077007";
+  
+  // Open WhatsApp in a new tab
+  window.open(`https://wa.me/${phone}?text=${whatsappMessage}`, '_blank');
+};
 
-// REVEAL ON SCROLL
+// SCROLL REVEAL ANIMATION (Smooth entry for cards)
+const observerOptions = {
+  threshold: 0.15,
+  rootMargin: "0px 0px -50px 0px"
+};
+
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('active');
-    });
-}, { threshold: 0.1 });
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+      // Optional: Stop observing once revealed so it doesn't animate out
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// Attach observer to all elements with '.reveal' class
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+  });
+});
