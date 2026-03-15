@@ -2,132 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <meta name="description" content="Jayasinghe Tours & Car Rental: Premium Sri Lanka car with driver, rent a car Sri Lanka, car rental, Sri Lanka tours. Reliable local driver guides, best fleet for Sigiriya, Kandy, Ella & Yala. Book now!">
-  <meta name="keywords" content="Srilanka tours, Car rental in Srilanka, Srilankacarwithdriver, rent a car srilanka, carrental, Sri Lanka taxi, driver guide, Sigiriya, Kandy, Ella, Yala, Negombo airport pickup">
-  <meta name="author" content="Jayasinghe Tours">
-  <meta name="robots" content="index, follow">
-  
-  <title>Jayasinghe Tours | Sri Lanka Car Rental & Tours with Driver</title>
-
-  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Jayasinghe Tours & Car Rental Sri Lanka. Premium cars with driver.">
+  <title>Jayasinghe Tours | Sri Lanka Premium Rental</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="navbar">
-  <a href="#" class="navbar-brand">
-    <img src="https://jayasinghetours.github.io/logo.png" alt="Jayasinghe Tours Logo">
+<nav class="navbar">
+  <div class="navbar-brand">
+    <img src="https://jayasinghetours.github.io/logo.png" alt="Logo">
     <h2>Jayasinghe Tours</h2>
-  </a>
+  </div>
   <div class="nav-links">
     <a href="#">Home</a>
     <a href="#cars">Cars</a>
     <a href="#tours">Tours</a>
-    <a href="#booking">Book Now</a>
-    <a href="#contact">Contact</a>
+    <a href="#booking">Book</a>
   </div>
-</div>
+</nav>
 
-<div class="hero-slider">
-  <div class="slide active-slide" id="slide1" style="background-image: url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop');">
-    <div class="slide-content"><h1>Car Rental in Sri Lanka</h1><p>with premium driver-guides • unlimited miles • free wifi</p><a href="#booking" class="hero-btn">🚗 Book your ride</a></div>
+<header class="hero-slider">
+  <div class="slide active-slide" style="background-image: url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop');">
+    <div class="slide-content">
+      <h1>Explore Sri Lanka</h1>
+      <p>Premium Car Rental with Professional Drivers</p>
+      <a href="#booking" class="hero-btn">🚗 Book Now</a>
+    </div>
   </div>
-  <div class="slide" id="slide2" style="background-image: url('https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?q=80&w=2070&auto=format&fit=crop');">
-    <div class="slide-content"><h1>Sri Lanka Tours</h1><p>Sigiriya • Kandy • Ella • Yala — all inclusive</p><a href="#tours" class="hero-btn">🏝️ Explore tours</a></div>
+  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?q=80&w=2070&auto=format&fit=crop');">
+    <div class="slide-content">
+      <h1>Adventure Awaits</h1>
+      <p>Sigiriya, Kandy, & Ella Luxury Tours</p>
+      <a href="#tours" class="hero-btn">🏝️ View Tours</a>
+    </div>
   </div>
-  <div class="slide" id="slide3" style="background-image: url('https://images.unsplash.com/photo-1606664518154-36532a7c7740?q=80&w=1974&auto=format&fit=crop');">
-    <div class="slide-content"><h1>Professional Drivers</h1><p>Local experts • safe & reliable • airport pickup</p><a href="https://wa.me/94787077007" class="hero-btn">🧳 Chat on WhatsApp</a></div>
+  <div class="dots-container">
+    <span class="dot active-dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
   </div>
-  <span class="slider-arrow prev" onclick="changeSlide(-1)">&#10094;</span>
-  <span class="slider-arrow next" onclick="changeSlide(1)">&#10095;</span>
-  <div class="dots-container"><span class="dot active-dot" onclick="currentSlide(1)"></span><span class="dot" onclick="currentSlide(2)"></span><span class="dot" onclick="currentSlide(3)"></span></div>
-</div>
+</header>
 
 <section class="section" id="cars">
-  <h2 class="reveal">Our Fleet • Car rental Sri Lanka</h2>
-  <div class="cards">
+  <h2 class="reveal">Our Premium Fleet</h2>
+  <div class="cards-grid">
     <div class="card reveal" onclick="openModal('wagonr')">
-      <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=800&auto=format&fit=crop" alt="Suzuki Wagon R" loading="lazy">
-      <div class="card-content"><h3>Suzuki Wagon R</h3><p>Compact • fuel-saver • perfect for city tours</p></div>
+      <div class="card-img-container">
+        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=800&auto=format&fit=crop" alt="Wagon R">
+      </div>
+      <div class="card-content"><h3>Suzuki Wagon R</h3><p>Compact & Efficient</p></div>
     </div>
     <div class="card reveal" onclick="openModal('axio')">
-      <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=800&auto=format&fit=crop" alt="Toyota Axio" loading="lazy">
-      <div class="card-content"><h3>Toyota Axio</h3><p>Spacious sedan • ideal for families</p></div>
-    </div>
-    <div class="card reveal" onclick="openModal('aqua')">
-      <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=800&auto=format&fit=crop" alt="Toyota Aqua" loading="lazy">
-      <div class="card-content"><h3>Toyota Aqua</h3><p>Hybrid • eco • automatic with driver</p></div>
+      <div class="card-img-container">
+        <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=800&auto=format&fit=crop" alt="Axio">
+      </div>
+      <div class="card-content"><h3>Toyota Axio</h3><p>Comfortable Sedan</p></div>
     </div>
   </div>
 </section>
 
-<section class="section" id="tours">
-  <h2 class="reveal">Sri Lanka Tours with driver</h2>
-  <div class="cards">
-    <div class="card reveal" onclick="openModal('sigiriya')"><img src="https://images.unsplash.com/photo-1588598198321-97368dcf0456?q=80&w=800&auto=format&fit=crop" alt="Sigiriya Rock"><div class="card-content"><h3>Sigiriya</h3><p>Ancient fortress & frescoes</p></div></div>
-    <div class="card reveal" onclick="openModal('kandy')"><img src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?q=80&w=800&auto=format&fit=crop" alt="Kandy Temple"><div class="card-content"><h3>Kandy</h3><p>Temple of Tooth, cultural show</p></div></div>
-    <div class="card reveal" onclick="openModal('ella')"><img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800&auto=format&fit=crop" alt="Ella Sri Lanka"><div class="card-content"><h3>Ella</h3><p>Nine Arches, tea country</p></div></div>
-    <div class="card reveal" onclick="openModal('yala')"><img src="https://images.unsplash.com/photo-1544181093-c712fbca8073?q=80&w=800&auto=format&fit=crop" alt="Yala leopard"><div class="card-content"><h3>Yala Safari</h3><p>Leopards & elephants</p></div></div>
-  </div>
-</section>
-
-<section class="section" id="reviews" style="background: #eef2f7;">
-  <h2 class="reveal">What Our Guests Say</h2>
-  <div class="cards">
-    <div class="card reveal" style="cursor: default; padding: 25px;">
-      <div style="color: #ffb347; font-size: 1.2rem; margin-bottom: 10px;">★★★★★</div>
-      <p style="font-style: italic;">"Excellent service! Our driver was very professional and knew all the best spots in Ella. Highly recommend Jayasinghe Tours."</p>
-      <h4 style="margin-top: 15px; color: #0a2e4d;">— Sarah Johnson, UK</h4>
-    </div>
-    <div class="card reveal" style="cursor: default; padding: 25px;">
-      <div style="color: #ffb347; font-size: 1.2rem; margin-bottom: 10px;">★★★★★</div>
-      <p style="font-style: italic;">"The Toyota Axio was spotless. Safe driving and very friendly guide. Made our Sri Lanka trip unforgettable!"</p>
-      <h4 style="margin-top: 15px; color: #0a2e4d;">— Mark & Elena, Germany</h4>
-    </div>
-  </div>
-</section>
-
-<section class="section reveal" id="booking">
-  <h2>Book Your Journey</h2>
-  <p>Fill in the details below and we will contact you via WhatsApp immediately.</p>
-  <div class="booking-container">
+<section class="section" id="booking">
+  <h2 class="reveal">Fast Booking</h2>
+  <div class="booking-card">
     <form id="bookingForm" onsubmit="sendBooking(event)">
-      <div class="form-group">
-        <input type="text" id="name" placeholder="Your Full Name" required>
-        <input type="email" id="email" placeholder="Email Address" required>
-      </div>
-      <div class="form-group">
-        <select id="service" required>
-          <option value="" disabled selected>Select Service</option>
-          <option value="Car Rental">Car Rental with Driver</option>
-          <option value="Full Tour">Full Sri Lanka Tour</option>
-          <option value="Airport Transfer">Airport Transfer</option>
-        </select>
-        <input type="text" id="date" placeholder="Pickup Date (DD/MM/YYYY)" required>
-      </div>
-      <textarea id="message" rows="4" placeholder="Additional details (No. of people, destination, etc.)"></textarea>
-      <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">📩 Send Inquiry via WhatsApp</button>
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="date" id="date" required>
+      <select id="service" required>
+        <option value="Car Rental">Car Rental</option>
+        <option value="Tour Package">Tour Package</option>
+      </select>
+      <button type="submit" class="btn-submit">Inquire on WhatsApp</button>
     </form>
   </div>
 </section>
 
-<section class="section reveal" id="contact">
-  <h2>📞 Contact us 24/7</h2>
-  <div class="contact-info">📍 No 2 Jubilee Mw, Katana, Sri Lanka</div>
-  <div class="contact-info">📞 +94 787 077 007</div>
-  <div class="contact-info">✉️ booking@jayasinghetours.com</div>
-</section>
+<div id="wagonr" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('wagonr')">&times;</span>
+    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=800&auto=format&fit=crop" class="modal-img">
+    <h2>Suzuki Wagon R</h2>
+    <p>The perfect choice for couples or solo travelers. Includes A/C and unlimited mileage with our driver.</p>
+    <div class="price-tag">$45 / Day</div>
+    <a href="https://wa.me/94787077007" class="hero-btn">Book This Car</a>
+  </div>
+</div>
 
-<footer>
-  <p>© 2026 Jayasinghe Tours & Car Rental • Sri Lanka</p>
-</footer>
+<div id="axio" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('axio')">&times;</span>
+    <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=800&auto=format&fit=crop" class="modal-img">
+    <h2>Toyota Axio</h2>
+    <p>Premium sedan with plenty of luggage space. Perfect for long distance island tours.</p>
+    <div class="price-tag">$65 / Day</div>
+    <a href="https://wa.me/94787077007" class="hero-btn">Book This Car</a>
+  </div>
+</div>
 
-<div id="wagonr" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('wagonr')">&times;</span><h2>Suzuki Wagon R</h2><p>Perfect for 4 pax. Driver included.</p><a class="btn" href="https://wa.me/94787077007">Inquire Now</a></div></div>
-<a class="whatsapp" href="https://wa.me/94787077007">💬 Chat With Us</a>
+<a href="https://wa.me/94787077007" class="whatsapp-float">💬 Chat</a>
 
-<script src="script.js" defer></script>
+<script src="script.js"></script>
 </body>
 </html>
