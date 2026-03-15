@@ -57,7 +57,7 @@ html { scroll-behavior: smooth; }
 .section-header h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent); margin: 15px auto 0; border-radius: 2px; }
 .section-header p { color: var(--text-light); font-size: 1.1rem; }
 
-/* VERTICAL LIST LAYOUT (Highly Professional) */
+/* VERTICAL LIST LAYOUT */
 .vertical-layout { display: flex; flex-direction: column; gap: 30px; max-width: 900px; margin: 0 auto; }
 .vertical-card { 
   display: flex; flex-direction: row; background: white; border-radius: 16px; 
@@ -78,7 +78,7 @@ html { scroll-behavior: smooth; }
 /* BOOKING FORM */
 .booking-card { background: white; padding: 40px; border-radius: 20px; max-width: 700px; margin: 0 auto; box-shadow: 0 15px 40px rgba(0,0,0,0.08); text-align: left; }
 .form-row { display: flex; gap: 15px; margin-bottom: 15px; }
-input, select { width: 100%; padding: 15px; border: 2px solid #eef2f7; border-radius: 10px; font-size: 1rem; outline: none; transition: 0.3s; font-family: inherit; }
+input, select, optgroup { width: 100%; padding: 15px; border: 2px solid #eef2f7; border-radius: 10px; font-size: 1rem; outline: none; transition: 0.3s; font-family: inherit; }
 input:focus, select:focus { border-color: var(--accent); }
 .btn-submit { width: 100%; background: var(--primary); color: white; padding: 16px; border: none; border-radius: 10px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s; margin-top: 10px; }
 .btn-submit:hover { background: #061c30; }
@@ -109,18 +109,14 @@ footer { background: var(--primary); color: white; padding: 60px 5% 20px; margin
 .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* MOBILE RESPONSIVE (Fixing vertical layout for phones) */
+/* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
-  .nav-links { display: none; } /* Keeps header super clean on mobile */
-  
+  .nav-links { display: none; } 
   .vertical-card { flex-direction: column; }
   .vertical-card img { width: 100%; height: 220px; }
   .vertical-card-content { width: 100%; padding: 25px; }
-  
   .form-row { flex-direction: column; gap: 0; }
-  
   .footer-container { flex-direction: column; gap: 30px; }
-  
   .section { padding: 50px 5%; }
   .slide-content h1 { font-size: 2.2rem; }
 }
