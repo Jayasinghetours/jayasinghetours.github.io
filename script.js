@@ -1,29 +1,59 @@
-// Keep all your previous Slider/Modal/Reveal logic...
+// HERO SLIDER
+let currentIdx = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
 
-// ---------- BOOKING FORM LOGIC ----------
-function sendBooking(event) {
-  event.preventDefault();
-  
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const service = document.getElementById('service').value;
-  const date = document.getElementById('date').value;
-  const message = document.getElementById('message').value;
+function showSlides() {
+    slides.forEach((s, i) => {
+        s.classList.toggle('active-slide', i === currentIdx);
+        dots[i].classList.toggle('active-dot', i === currentIdx);
+    });
+    currentIdx = (currentIdx + 1) % slides.length;
+}
+setInterval(showSlides, 5000);
 
-  // Construct WhatsApp Message
-  const whatsappText = `Hello Jayasinghe Tours!%0A%0A` +
-    `I would like to book a service:%0A` +
-    `*Name:* ${name}%0A` +
-    `*Email:* ${email}%0A` +
-    `*Service:* ${service}%0A` +
-    `*Date:* ${date}%0A` +
-    `*Details:* ${message}`;
-
-  // Open WhatsApp
-  window.open(`https://wa.me/94787077007?text=${whatsappText}`, '_blank');
+// MODAL LOGIC
+function openModal(id) {
+    const modal = document.getElementById(id);
+    if(modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Stop scrolling background
+    }
 }
 
-// Ensure global access
-window.sendBooking = sendBooking;
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    if(modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
 
-// (All your other code: showSlide, openModal, checkReveal, etc. remains below)
+// Close modal if clicking outside the box
+window.onclick = function(event) {
+    if (event.target.className === 'modal') {
+        event.target.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// BOOKING FORM
+function sendBooking(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const date = document.getElementById('date').value;
+    const service = document.getElementById('service').value;
+    
+    const text = `Hello Jayasinghe Tours! I'm ${name}. I want to book a ${service} for ${date}.`;
+    const url = `https://wa.me/94787077007?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+}
+
+// REVEAL ON SCROLL
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
