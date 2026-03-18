@@ -1,5 +1,5 @@
 // ==========================================
-// PRELOADER LOGIC (Added)
+// PRELOADER LOGIC
 // ==========================================
 function hidePreloader() {
     const preloader = document.getElementById('preloader');
@@ -24,7 +24,6 @@ if (hamburger && navLinks) {
     navLinks.classList.toggle('active');
   });
 
-  // Close menu when a link is clicked
   const links = navLinks.querySelectorAll('a');
   links.forEach(link => {
     link.addEventListener('click', () => {
@@ -64,9 +63,10 @@ window.currentSlide = function(index) {
 };
 
 // ==========================================
-// 2. MODAL & INNER GALLERY LOGIC
+// 2. MODAL & INNER GALLERY LOGIC (WITH AUTO-PLAY)
 // ==========================================
 const galleryState = {};
+let modalAutoPlay; // Auto play timer eka
 
 window.openModal = function(id) {
   const modal = document.getElementById(id);
@@ -79,6 +79,12 @@ window.openModal = function(id) {
     if(track) {
       track.style.transform = `translateX(0%)`;
     }
+
+    // Modal eka open kalama thappara 3n 3ta slide wenna patan gannawa
+    clearInterval(modalAutoPlay);
+    modalAutoPlay = setInterval(() => {
+        window.moveModalGallery(id, 1);
+    }, 3000);
   }
 };
 
@@ -87,6 +93,9 @@ window.closeModal = function(id) {
   if (modal) {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto'; 
+    
+    // Modal eka close kalama auto play eka nawathinawa
+    clearInterval(modalAutoPlay); 
   }
 };
 
@@ -109,12 +118,21 @@ window.moveModalGallery = function(modalId, step) {
   }
   
   track.style.transform = `translateX(-${galleryState[modalId] * 100}%)`;
+
+  // Kenek manully arrow eka click kaloth, timer eka reset wenawa
+  clearInterval(modalAutoPlay);
+  modalAutoPlay = setInterval(() => {
+      window.moveModalGallery(modalId, 1);
+  }, 3000);
 };
 
 window.onclick = function(event) {
   if (event.target.classList.contains('modal')) {
     event.target.style.display = 'none';
     document.body.style.overflow = 'auto';
+    
+    // Eliya click karala close kalath auto play eka nawathinawa
+    clearInterval(modalAutoPlay);
   }
 };
 
