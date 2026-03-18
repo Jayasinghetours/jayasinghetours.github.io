@@ -1,15 +1,26 @@
 // ==========================================
-// PRELOADER LOGIC
+// PRELOADER LOGIC (FIXED)
 // ==========================================
-window.addEventListener('load', function() {
+function hidePreloader() {
     const preloader = document.getElementById('preloader');
-    setTimeout(() => {
+    if (preloader && preloader.style.display !== 'none') {
         preloader.style.opacity = '0';
         setTimeout(() => {
             preloader.style.display = 'none';
         }, 500);
-    }, 1500); // 1.5 seconds thiyanawa lassanata pennanna
-});
+    }
+}
+
+// Site eka load unama ain karanna
+window.addEventListener('load', hidePreloader);
+
+// FAILSAFE: Site eka load wenna wela giyath thappara 4kin auto ain wenna
+setTimeout(hidePreloader, 4000); 
+
+// ==========================================
+// ANITH CODE TIKA (Parana widiyatama thiyanna)
+// ==========================================
+// ... hamburger menu, slider logic, etc.
 
 // ==========================================
 // MOBILE MENU TOGGLE
