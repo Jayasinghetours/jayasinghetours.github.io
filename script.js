@@ -1,88 +1,182 @@
 // ==========================================
-// 1. PRELOADER FAILSAFE
+// PRELOADER LOGIC
 // ==========================================
 function hidePreloader() {
     const preloader = document.getElementById('preloader');
-    if (preloader) {
+    if (preloader && preloader.style.opacity !== '0') {
         preloader.style.opacity = '0';
         setTimeout(() => {
             preloader.style.display = 'none';
-        }, 600);
+        }, 500);
     }
 }
 window.addEventListener('load', hidePreloader);
-setTimeout(hidePreloader, 4000); // 4s failsafe
+setTimeout(hidePreloader, 4000); // Failsafe
 
 // ==========================================
-// 2. MODAL LOGIC + CLICK OUTSIDE TO CLOSE
+// 0. MOBILE MENU TOGGLE
 // ==========================================
-window.openModal = function(id) {
-    const modal = document.getElementById(id);
-    if (modal) {
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    }
-};
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
 
-window.closeModal = function(id) {
-    const modal = document.getElementById(id);
-    if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-};
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
 
-// Close when clicking outside of the modal-content
-window.onclick = function(event) {
-    if (event.target.classList.contains('modal')) {
-        event.target.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-};
+  const links = navLinks.querySelectorAll('a');
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+    });
+  });
+}
 
 // ==========================================
-// 3. HERO SLIDER
+// 1. HERO SLIDER LOGIC
 // ==========================================
 let slideIndex = 0;
 const slides = document.querySelectorAll('.slide');
 const dots = document.querySelectorAll('.dot');
+let sliderInterval;
 
 function showSlide(index) {
-    slides.forEach(s => s.classList.remove('active-slide'));
-    dots.forEach(d => d.classList.remove('active-dot'));
-    if(slides[index]) slides[index].classList.add('active-slide');
-    if(dots[index]) dots[index].classList.add('active-dot');
+  slides.forEach(s => s.classList.remove('active-slide'));
+  dots.forEach(d => d.classList.remove('active-dot'));
+  if(slides[index]) slides[index].classList.add('active-slide');
+  if(dots[index]) dots[index].classList.add('active-dot');
 }
 
 function nextSlide() {
-    slideIndex = (slideIndex + 1) % slides.length;
-    showSlide(slideIndex);
+  if(slides.length === 0) return;
+  slideIndex = (slideIndex + 1) % slides.length;
+  showSlide(slideIndex);
 }
-setInterval(nextSlide, 5000);
 
-window.currentSlide = (index) => { slideIndex = index; showSlide(slideIndex); };
+sliderInterval = setInterval(nextSlide, 5000);
 
-// ==========================================
-// 4. WHATSAPP BOOKING
-// ==========================================
-window.sendBooking = function(event) {
-    event.preventDefault();
-    const name = document.getElementById('name').value;
-    const date = document.getElementById('date').value;
-    const service = document.getElementById('service').value;
-    const msg = `Hi Jayasinghe Tours!%0A*Booking Inquiry*%0AName: ${name}%0ADate: ${date}%0ASelection: ${service}`;
-    window.open(`https://wa.me/94787077007?text=${msg}`, '_blank');
+window.currentSlide = function(index) {
+  clearInterval(sliderInterval); 
+  slideIndex = index;
+  showSlide(slideIndex);
+  sliderInterval = setInterval(nextSlide, 5000); 
 };
 
 // ==========================================
-// 5. SCROLL REVEAL
+// 2. MODAL & INNER GALLERY LOGIC (Original Exact Logic)
 // ==========================================
+const galleryState = {};
+
+window.openModal = function(id) {
+  const modal = document.getElementById(id);
+  if (modal) {
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden'; 
+    
+    galleryState[id] = 0;
+    const track = document.getElementById(`track-${id}`);
+    if(track) {
+      track.style.transform = `translateX(0%)`;
+    }
+  }
+};
+
+window.closeModal = function(id) {
+  const modal = document.getElementById(id);
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; 
+  }
+};
+
+window.moveModalGallery = function(modalId, step) {
+  if(galleryState[modalId] === undefined) {
+    galleryState[modalId] = 0;
+  }
+  
+  const track = document.getElementById(`track-${modalId}`);
+  if(!track) return;
+  
+  const totalImages = track.children.length;
+  galleryState[modalId] += step;
+  
+  if (galleryState[modalId] >= totalImages) {
+    galleryState[modalId] = 0;
+  }
+  if (galleryState[modalId] < 0) {
+    galleryState[modalId] = totalImages - 1;
+  }
+  
+  track.style.transform = `translateX(-${galleryState[modalId] * 100}%)`;
+};
+
+// Eliya click kalama close wena eka
+window.onclick = function(event) {
+  if (event.target.classList.contains('modal')) {
+    event.target.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+};
+
+// ==========================================
+// 3. WHATSAPP BOOKING LOGIC
+// ==========================================
+window.sendBooking = function(event) {
+  event.preventDefault(); 
+  
+  const name = document.getElementById('name').value;
+  const date = document.getElementById('date').value;
+  const service = document.getElementById('service').value;
+  
+  const whatsappMessage = `Hello Jayasinghe Tours!%0A%0A` +
+                          `I would like to make an inquiry:%0A` +
+                          `*Name:* ${name}%0A` +
+                          `*Date:* ${date}%0A` +
+                          `*Selected Tour/Car:* ${service}%0A%0A` +
+                          `Please let me know the details and availability.`;
+                          
+  const phone = "94787077007";
+  window.open(`https://wa.me/${phone}?text=${whatsappMessage}`, '_blank');
+};
+
+// ==========================================
+// 4. SCROLL ANIMATIONS (Reveal)
+// ==========================================
+const observerOptions = {
+  threshold: 0.15,
+  rootMargin: "0px 0px -50px 0px"
+};
+
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('active');
-    });
-}, { threshold: 0.1 });
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+  });
+});
+
+// ==========================================
+// 5. SMART WHATSAPP BUTTON
+// ==========================================
+window.addEventListener('scroll', function() {
+  const whatsappBtn = document.querySelector('.whatsapp-float');
+  const footer = document.querySelector('.premium-footer');
+  
+  if (!whatsappBtn || !footer) return;
+
+  const scrollPosition = window.innerHeight + window.scrollY;
+  const footerPosition = document.body.offsetHeight - footer.offsetHeight;
+
+  if (scrollPosition >= footerPosition) {
+    whatsappBtn.style.bottom = '100px'; 
+  } else {
+    whatsappBtn.style.bottom = '25px';
+  }
 });
