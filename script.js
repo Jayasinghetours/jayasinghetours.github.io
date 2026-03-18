@@ -1,126 +1,88 @@
 // ==========================================
-// PRELOADER LOGIC (FIXED)
+// 1. PRELOADER FAILSAFE
 // ==========================================
 function hidePreloader() {
     const preloader = document.getElementById('preloader');
-    if (preloader && preloader.style.display !== 'none') {
+    if (preloader) {
         preloader.style.opacity = '0';
         setTimeout(() => {
             preloader.style.display = 'none';
-        }, 500);
+        }, 600);
     }
 }
-
-// Site eka load unama ain karanna
 window.addEventListener('load', hidePreloader);
-
-// FAILSAFE: Site eka load wenna wela giyath thappara 4kin auto ain wenna
-setTimeout(hidePreloader, 4000); 
+setTimeout(hidePreloader, 4000); // 4s failsafe
 
 // ==========================================
-// ANITH CODE TIKA (Parana widiyatama thiyanna)
+// 2. MODAL LOGIC + CLICK OUTSIDE TO CLOSE
 // ==========================================
-// ... hamburger menu, slider logic, etc.
+window.openModal = function(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+};
+
+window.closeModal = function(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+};
+
+// Close when clicking outside of the modal-content
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+};
 
 // ==========================================
-// MOBILE MENU TOGGLE
-// ==========================================
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('nav-links');
-
-if (hamburger && navLinks) {
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
-}
-
-// ==========================================
-// HERO SLIDER LOGIC
+// 3. HERO SLIDER
 // ==========================================
 let slideIndex = 0;
 const slides = document.querySelectorAll('.slide');
 const dots = document.querySelectorAll('.dot');
-let sliderInterval;
 
 function showSlide(index) {
-  slides.forEach(s => s.classList.remove('active-slide'));
-  dots.forEach(d => d.classList.remove('active-dot'));
-  if(slides[index]) slides[index].classList.add('active-slide');
-  if(dots[index]) dots[index].classList.add('active-dot');
+    slides.forEach(s => s.classList.remove('active-slide'));
+    dots.forEach(d => d.classList.remove('active-dot'));
+    if(slides[index]) slides[index].classList.add('active-slide');
+    if(dots[index]) dots[index].classList.add('active-dot');
 }
 
 function nextSlide() {
-  if(slides.length === 0) return;
-  slideIndex = (slideIndex + 1) % slides.length;
-  showSlide(slideIndex);
+    slideIndex = (slideIndex + 1) % slides.length;
+    showSlide(slideIndex);
 }
+setInterval(nextSlide, 5000);
 
-sliderInterval = setInterval(nextSlide, 5000);
-
-window.currentSlide = function(index) {
-  clearInterval(sliderInterval); 
-  slideIndex = index;
-  showSlide(slideIndex);
-  sliderInterval = setInterval(nextSlide, 5000); 
-};
+window.currentSlide = (index) => { slideIndex = index; showSlide(slideIndex); };
 
 // ==========================================
-// MODAL & GALLERY LOGIC
-// ==========================================
-const galleryState = {};
-
-window.openModal = function(id) {
-  const modal = document.getElementById(id);
-  if (modal) {
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden'; 
-    galleryState[id] = 0;
-    const track = document.getElementById(`track-${id}`);
-    if(track) track.style.transform = `translateX(0%)`;
-  }
-};
-
-window.closeModal = function(id) {
-  const modal = document.getElementById(id);
-  if (modal) {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; 
-  }
-};
-
-window.moveModalGallery = function(modalId, step) {
-  const track = document.getElementById(`track-${modalId}`);
-  if(!track) return;
-  const totalImages = track.children.length;
-  galleryState[modalId] = (galleryState[modalId] + step + totalImages) % totalImages;
-  track.style.transform = `translateX(-${galleryState[modalId] * 100}%)`;
-};
-
-// ==========================================
-// WHATSAPP BOOKING LOGIC
+// 4. WHATSAPP BOOKING
 // ==========================================
 window.sendBooking = function(event) {
-  event.preventDefault(); 
-  const name = document.getElementById('name').value;
-  const date = document.getElementById('date').value;
-  const service = document.getElementById('service').value;
-  
-  const whatsappMessage = `Hello Jayasinghe Tours!%0A%0AI would like to inquire:%0A*Name:* ${name}%0A*Date:* ${date}%0A*Selected:* ${service}`;
-  const phone = "94787077007";
-  window.open(`https://wa.me/${phone}?text=${whatsappMessage}`, '_blank');
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const date = document.getElementById('date').value;
+    const service = document.getElementById('service').value;
+    const msg = `Hi Jayasinghe Tours!%0A*Booking Inquiry*%0AName: ${name}%0ADate: ${date}%0ASelection: ${service}`;
+    window.open(`https://wa.me/94787077007?text=${msg}`, '_blank');
 };
 
 // ==========================================
-// SCROLL REVEAL
+// 5. SCROLL REVEAL
 // ==========================================
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('active');
-    }
-  });
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+    });
 }, { threshold: 0.1 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 });
