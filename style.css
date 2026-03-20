@@ -159,6 +159,26 @@ input:focus, select:focus { border-color: #ffb347; box-shadow: 0 0 0 3px rgba(25
     .section { padding: 50px 5%; }
 }
 
+
+/* Mobile screen (768px වලට අඩු) සඳහා */
+@media screen and (max-width: 768px) {
+    .hero-slider, .slide {
+        height: 300px !important; /* Mobile එකේදී banner එකේ උස අඩු කරන්න */
+        background-size: 100% 100%; /* Image එක screen එකට fit වෙන්න */
+        background-position: center;
+    }
+
+    .slide-content h1 {
+        font-size: 1.8rem; /* Mobile එකේදී අකුරු ටිකක් කුඩා කරන්න */
+    }
+
+    .slide-content p {
+        font-size: 1rem;
+    }
+}
+
+
 /* Animations */
 .reveal { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.5, 0, 0, 1); }
 .reveal.active { opacity: 1; transform: translateY(0); }
+ 
