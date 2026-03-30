@@ -235,18 +235,27 @@ input:focus, select:focus, textarea:focus { border-color: var(--primary-gold); b
 /* 9. MOBILE & TABLET MEDIA QUERIES          */
 /* ========================================= */
 @media screen and (max-width: 768px) {
-    /* Professional Mobile Hero (Premium Overhaul) */
+    /* Professional Mobile Hero (Premium Overhaul with Fallbacks) */
     .hero-slider { 
+        height: 100vh; /* Fallback */
         height: 100dvh; 
-        min-height: 550px; 
+        min-height: 500px; 
     }
-    .slide { background-size: cover; background-position: center center; }
+    .slide { background-size: cover; background-position: center; }
     .slide-content { 
         padding: 40px 25px; 
-        align-self: flex-end; width: 90%; 
-        margin: 0 auto 5vh; 
-        background: rgba(0,0,0,0.4); 
-        backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+        align-self: flex-end; width: 92%; 
+        margin: 0 auto 6vh; 
+        background: rgba(18, 18, 18, 0.85); /* Solid fallback for non-blur browsers */
+    }
+    @supports (backdrop-filter: blur(15px)) or (-webkit-backdrop-filter: blur(15px)) {
+        .slide-content {
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+    }
+    .slide-content {
         border: 1px solid rgba(255,255,255,0.1);
         border-radius: 20px;
         text-align: center;
