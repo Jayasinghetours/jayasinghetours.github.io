@@ -236,12 +236,23 @@ input:focus, select:focus, textarea:focus { border-color: var(--primary-gold); b
 /* 9. MOBILE & TABLET MEDIA QUERIES          */
 /* ========================================= */
 @media screen and (max-width: 768px) {
-    /* Hero Banner Optimizations */
-    .hero-slider { height: 80vh; height: 80svh; min-height: 450px; }
-    .slide { background-position: center bottom; } /* focus down slightly */
-    .slide-content { padding: 80px 25px 40px; justify-content: flex-end; }
-    .slide-content h1 { font-size: 2.1rem; line-height: 1.1; margin-bottom: 12px; }
-    .slide-content p { font-size: 1rem; line-height: 1.4; opacity: 0.9; margin-bottom: 30px; }
+    /* Final Mobile Hero Fit (Anti-Crop) */
+    .hero-slider { 
+        height: auto; 
+        aspect-ratio: 16 / 9; /* Matches native landscape photo aspect ratio */
+        min-height: 250px; 
+        max-height: 45vh; 
+    }
+    .slide { background-size: contain; background-repeat: no-repeat; background-position: center; background-color: #000; }
+    .slide-content { 
+        position: relative; padding: 20px; 
+        background: rgba(18, 18, 18, 0.85); 
+        text-align: center; border-radius: 0;
+        margin-top: auto; 
+    }
+    .slide-content h1 { font-size: 1.5rem; margin-bottom: 5px; }
+    .slide-content p { font-size: 0.85rem; margin-bottom: 15px; }
+    .hero-btn { padding: 12px 20px; font-size: 11px; margin: 0 auto; }
     .hero-btn { width: 100%; max-width: 250px; justify-content: center; }
 
     /* Navbar Glassmorphism Overlay */
