@@ -213,35 +213,18 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
+    background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    overflow: hidden;
     transition: opacity 1.5s ease-in-out;
-}
-
-/* Background image as <img> tag — stable on mobile (no zoom on scroll) */
-.slide-bg-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-    z-index: 0;
-    will-change: transform;
-    transition: transform 0.3s ease;
 }
 
 .active-slide {
     opacity: 1;
     z-index: 1;
-}
-
-/* Ken Burns zoom only on the img — desktop only */
-.active-slide .slide-bg-img {
     animation: kenBurns 20s infinite alternate;
 }
 
@@ -875,22 +858,8 @@ button {
     }
 
     .slide {
-        background-size: unset;
-        background-position: unset;
-        animation: none !important;
-    }
-
-    .active-slide {
-        animation: none !important;
-    }
-
-    /* Disable ALL zoom/animation on mobile img — keeps image perfectly still */
-    .slide-bg-img,
-    .active-slide .slide-bg-img {
-        animation: none !important;
-        will-change: auto;
-        transform: none !important;
-        object-position: center 30%; /* show upper/centre of landscape image */
+        background-size: cover;
+        background-position: center;
     }
 
     .slide-content {
@@ -1066,8 +1035,8 @@ button {
 @media screen and (max-width: 480px) {
     .hero-slider {
         height: 55vh;
-        min-height: 320px;
-        max-height: 460px;
+        min-height: 380px;
+        max-height: 480px;
     }
 
     .slide-content {
@@ -1107,8 +1076,8 @@ button {
 @media screen and (max-width: 375px) {
     .hero-slider {
         height: 50vh;
-        min-height: 300px;
-        max-height: 420px;
+        min-height: 350px;
+        max-height: 400px;
     }
 
     .slide-content h1 {
