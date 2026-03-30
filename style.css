@@ -269,3 +269,92 @@ a, button { -webkit-tap-highlight-color: transparent; }
     .slide-content p { font-size: 0.9rem; }
     .section-header h2 { font-size: 1.7rem; }
 }
+
+
+
+/* ========================================= */
+/* MOBILE RESPONSIVE CSS (Mobiles & Tablets) */
+/* ========================================= */
+@media screen and (max-width: 768px) {
+    /* Navbar & Mobile Hamburger Menu */
+    .hamburger {
+        display: block !important;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 75px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 75px);
+        background: rgba(18, 18, 18, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s ease-in-out;
+        z-index: 999;
+    }
+    
+    .nav-links.active {
+        left: 0;
+    }
+    
+    .nav-links a {
+        margin: 15px 0;
+        font-size: 18px;
+    }
+
+    /* Hero Slider & Text */
+    .hero-slider {
+        height: 70vh;
+    }
+    .slide-content h1 {
+        font-size: 2.2rem !important;
+        margin-bottom: 10px;
+    }
+    .slide-content p {
+        font-size: 1rem !important;
+        margin-bottom: 20px;
+    }
+
+    /* Vehicle & Tour Cards Grid */
+    .cards-grid {
+        display: grid;
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+        padding: 0 10px;
+    }
+
+    .horizontal-card {
+        display: flex;
+        flex-direction: column !important;
+        height: auto;
+    }
+    
+    .horizontal-card img {
+        width: 100% !important;
+        height: 250px !important;
+        object-fit: cover;
+        border-radius: 20px 20px 0 0 !important;
+    }
+
+    .card-content {
+        padding: 20px !important;
+    }
+
+    /* Features / Trust Section */
+    .features-grid {
+        display: grid;
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+    }
+
+    /* General Sections Padding */
+    .section {
+        padding: 50px 5% !important;
+    }
+    
+    .section-header h2 {
+        font-size: 1.8rem !important;
+    }
+}
