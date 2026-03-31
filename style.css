@@ -396,13 +396,14 @@ body {
     height: 3px;
     background: var(--primary-gold);
     transform: scaleX(0);
-    transition: 0.4s;
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     transform-origin: left;
+    z-index: 5; /* Ensure it stays on top of .card-content */
 }
 
 .horizontal-card:hover {
     transform: translateY(-15px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
 }
 
 .horizontal-card:hover::after {
@@ -790,13 +791,33 @@ textarea:focus {
     background: var(--white);
     border: 1px solid rgba(0, 0, 0, 0.05);
     text-align: center;
-    transition: 0.3s;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--primary-gold);
+    transform: scaleX(0);
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform-origin: left;
+    z-index: 5;
 }
 
 .feature-item:hover {
-    transform: translateY(-10px);
+    transform: translateY(-15px);
     border-color: var(--primary-gold);
     box-shadow: var(--shadow-soft);
+}
+
+.feature-item:hover::after {
+    transform: scaleX(1);
 }
 
 .feature-item i {
@@ -977,6 +998,10 @@ button {
     .feature-item {
         padding: 28px 20px;
         transform: none !important;  /* disable hover lift on mobile */
+    }
+
+    .feature-item::after {
+        display: none; /* remove gold line on mobile to keep it simple */
     }
 
     /* ── Booking Card ── */
