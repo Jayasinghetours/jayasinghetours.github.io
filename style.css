@@ -200,35 +200,33 @@ body {
 }
 
 /* ========================================= */
-/* 4. HERO SLIDER — NATURAL IMAGE HEIGHT      */
+/* 4. HERO SLIDER                             */
 /* ========================================= */
 
 /*
- * ARCHITECTURE: CSS Grid Stacking
- * ─────────────────────────────────────────────────
- * All slides share grid-area:1/1 so they stack in the
- * same cell. The .slide img uses height:auto so the grid
- * cell height = image’s natural proportional height → zero crop.
- * Inactive slides have opacity:0 but still occupy space
- * (same image dimensions) so the container never jumps.
+ * Desktop  → 70vh  (cinematic banner)
+ * Mobile   → 56vw  (56% of viewport width = 9/16 ratio = matches 16:9 images perfectly)
+ *             390px phone: 390 x 0.56 = 218px ≈ natural 16:9 image height → minimal crop
  */
 .hero-slider {
-    display: grid;
     width: 100%;
+    height: 70vh;
+    min-height: 380px;
+    max-height: 900px;
+    position: relative;
     overflow: hidden;
     background: #000;
-    /* No fixed height — image defines the height */
 }
 
 .slide {
-    grid-area: 1 / 1;          /* Stack ALL slides in same cell */
-    position: relative;
+    position: absolute;
+    inset: 0;
     width: 100%;
+    height: 100%;
     opacity: 0;
     transition: opacity 1.5s ease-in-out;
     pointer-events: none;
     z-index: 0;
-    overflow: hidden;
 }
 
 .active-slide {
@@ -237,46 +235,38 @@ body {
     pointer-events: auto;
 }
 
-/*
- * The KEY change: width:100% + height:auto lets the image
- * display at its natural proportional size — no container
- * is forcing it to fill an arbitrary vh height, so
- * object-fit:cover has nothing to crop.
- */
 .slide-bg-img {
-    display: block;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;              /* Natural height — no crop */
-    max-height: 88vh;          /* Cap: never taller than viewport on huge screens */
-    object-fit: cover;         /* Safe fallback; minimal effect when height:auto */
+    height: 100%;
+    object-fit: cover;
     object-position: center center;
+    display: block;
     transform-origin: center center;
     will-change: transform;
 }
 
-/* Ken Burns: animates transform (not layout), clipped by overflow:hidden */
 .active-slide .slide-bg-img {
     animation: kenBurns 20s ease-in-out infinite alternate;
 }
 
 @keyframes kenBurns {
-    from { transform: scale(1); }
+    from { transform: scale(1);    }
     to   { transform: scale(1.08); }
 }
 
-/* Dark gradient overlay */
 .slide-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
         to bottom,
         rgba(0, 0, 0, 0.15) 0%,
-        rgba(0, 0, 0, 0.70) 100%
+        rgba(0, 0, 0, 0.72) 100%
     );
     z-index: 1;
 }
 
-/* Text centred on top of image */
 .slide-content {
     position: absolute;
     top: 50%;
@@ -306,16 +296,15 @@ body {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* Dots: same grid-area — sits at bottom of the stacked cell */
 .dots-container {
-    grid-area: 1 / 1;
-    align-self: end;
-    justify-self: center;
-    z-index: 10;
-    padding-bottom: 30px;
-    pointer-events: all;
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    width: 100%;
     text-align: center;
+    z-index: 10;
 }
+
 
 .dot {
     display: inline-block;
@@ -886,27 +875,25 @@ button {
 
 @media screen and (max-width: 768px) {
 
-    /* ── Hero — Natural height already works; just tune text & disable Ken Burns ── */
-    .slide-bg-img {
-        max-height: 75vw;       /* 390px phone → ~292px; shows full landscape image */
+    /* ── Hero: vw-proportional height matches landscape image ratio ── */
+    .hero-slider {
+        /*
+         * 56vw = 56% of viewport WIDTH used as height.
+         * 390px phone → 390 × 0.56 = 218px → matches 16:9 image (219px). Near-zero crop.
+         * 768px tablet → 768 × 0.56 = 430px → still proportional, nice banner height.
+         */
+        height: 56vw;
+        min-height: 200px;
+        max-height: 450px;
     }
 
-    /* Ken Burns off on mobile — avoids GPU jitter */
+    /* Disable Ken Burns on mobile — avoids GPU jitter */
     .active-slide .slide-bg-img {
         animation: none;
         transform: none;
     }
 
-    /* Text overlay on mobile */
-    .slide-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90%;
-        padding: 0 15px;
-    }
-
+    /* Mobile text sizing */
     .slide-content h1 {
         font-size: 1.9rem;
         line-height: 1.2;
@@ -918,13 +905,12 @@ button {
     .slide-content p {
         font-size: 1rem;
         line-height: 1.5;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
     }
 
     .hero-btn {
-        width: auto;
         border-radius: 8px;
-        padding: 13px 22px;
+        padding: 12px 22px;
         font-size: 13px;
         justify-content: center;
     }
