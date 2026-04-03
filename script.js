@@ -241,20 +241,162 @@ if (!('IntersectionObserver' in window)) {
 }
 
 // ==========================================
-// 5. SMART WHATSAPP BUTTON
+// 5. CUSTOM CHAT WIDGET
 // ==========================================
+function toggleChat() {
+  const chatWidget = document.getElementById('chat-widget');
+  if (chatWidget.classList.contains('open')) {
+    chatWidget.classList.remove('open');
+  } else {
+    chatWidget.classList.add('open');
+    document.getElementById('chat-user-input').focus();
+    
+    // Set 'Just now' time to current time on open
+    const timeInit = document.getElementById('chat-time-init');
+    if (timeInit && timeInit.innerText === 'Just now') {
+      const now = new Date();
+      timeInit.innerText = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    }
+  }
+}
+
+let chatState = 0;
+let chatData = { interest: '', name: '', date: '' };
+
+function handleQuickReply(text) {
+  // Hide quick replies
+  const quickRepliesDiv = document.getElementById('chat-quick-replies');
+  if (quickRepliesDiv) {
+    quickRepliesDiv.style.display = 'none';
+  }
+  
+  // Set the input box value and trigger send
+  const input = document.getElementById('chat-user-input');
+  input.value = text;
+  sendChatMessage();
+}
+
+function handleChatKeyPress(event) {
+  if (event.key === 'Enter') {
+    sendChatMessage();
+  }
+}
+
+function showTypingIndicator() {
+  const chatBody = document.getElementById('chat-widget-body');
+  const typingDiv = document.createElement('div');
+  typingDiv.className = 'chat-message bot-message typing-bubble-wrapper';
+  typingDiv.id = 'typing-indicator';
+  
+  typingDiv.innerHTML = `
+    <div class="typing-indicator">
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+    </div>
+  `;
+  chatBody.appendChild(typingDiv);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function removeTypingIndicator() {
+  const typingDiv = document.getElementById('typing-indicator');
+  if (typingDiv) typingDiv.remove();
+}
+
+function addBotMessage(text) {
+  const chatBody = document.getElementById('chat-widget-body');
+  const botReplyDiv = document.createElement('div');
+  botReplyDiv.className = 'chat-message bot-message';
+  botReplyDiv.innerHTML = `<div class="message-content"><p>${text}</p></div>`;
+  chatBody.appendChild(botReplyDiv);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function sendChatMessage() {
+  const input = document.getElementById('chat-user-input');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  // Hide quick replies if user typed manually
+  const quickRepliesDiv = document.getElementById('chat-quick-replies');
+  if (quickRepliesDiv && quickRepliesDiv.style.display !== 'none') {
+    quickRepliesDiv.style.display = 'none';
+  }
+
+  // Add user message to UI
+  const chatBody = document.getElementById('chat-widget-body');
+  const userMsgDiv = document.createElement('div');
+  userMsgDiv.className = 'chat-message user-message';
+  
+  const contentDiv = document.createElement('div');
+  contentDiv.className = 'message-content';
+  contentDiv.innerHTML = `<p>${msg.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>`;
+  
+  userMsgDiv.appendChild(contentDiv);
+  chatBody.appendChild(userMsgDiv);
+  chatBody.scrollTop = chatBody.scrollHeight;
+  input.value = '';
+
+  // Show typing indicator
+  setTimeout(showTypingIndicator, 300);
+
+  if (chatState === 0) {
+    chatData.interest = msg;
+    setTimeout(() => {
+      removeTypingIndicator();
+      addBotMessage("Great! First, could you please let me know your <b>Name</b>?");
+      chatState = 1;
+    }, 1200);
+  } 
+  else if (chatState === 1) {
+    chatData.name = msg;
+    setTimeout(() => {
+      removeTypingIndicator();
+      addBotMessage(`Nice to meet you, ${chatData.name.replace(/</g, "&lt;")}! What is your expected <b>Arrival Date</b> to Sri Lanka?`);
+      chatState = 2;
+    }, 1200);
+  }
+  else if (chatState === 2) {
+    chatData.date = msg;
+    setTimeout(() => {
+      removeTypingIndicator();
+      addBotMessage("Thank you! I am redirecting you to our live team on WhatsApp to finalize your inquiry...");
+      chatState = 3;
+      
+      // Final Redirect
+      setTimeout(() => {
+        const finalText = `*Website Inquiry*%0A%0A*Interest/Query:* ${chatData.interest}%0A*Name:* ${chatData.name}%0A*Arrival Date:* ${chatData.date}`;
+        const waUrl = `https://wa.me/94787077007?text=${finalText}`;
+        window.open(waUrl, '_blank');
+        addBotMessage(`If it doesn't open automatically, <a href="${waUrl}" target="_blank" style="color:#128c7e; font-weight:bold;">click here</a>.`);
+      }, 1000);
+    }, 1500);
+  }
+  else {
+    // If they keep chatting after state 3
+    setTimeout(() => {
+      removeTypingIndicator();
+      const finalText = `*Additional Message:* ${msg}`;
+      const waUrl = `https://wa.me/94787077007?text=${finalText}`;
+      window.open(waUrl, '_blank');
+    }, 800);
+  }
+}
+
+// Adjust chat widget position near footer
 window.addEventListener('scroll', function () {
-  const whatsappBtn = document.querySelector('.whatsapp-float');
+  const chatWidget = document.getElementById('chat-widget');
   const footer = document.querySelector('.premium-footer');
 
-  if (!whatsappBtn || !footer) return;
+  if (!chatWidget || !footer) return;
 
   const scrollPosition = window.innerHeight + window.scrollY;
   const footerPosition = document.body.offsetHeight - footer.offsetHeight;
 
   if (scrollPosition >= footerPosition) {
-    whatsappBtn.style.bottom = '100px';
+    chatWidget.style.bottom = '100px';
   } else {
-    whatsappBtn.style.bottom = '25px';
+    chatWidget.style.bottom = '25px';
   }
 });
