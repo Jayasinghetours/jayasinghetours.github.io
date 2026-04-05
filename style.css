@@ -1389,3 +1389,43 @@ button {
         font-size: 14px;
     }
 }
+
+/* ========================================= */
+/* 10. SWIPER CUSTOM STYLES                  */
+/* ========================================= */
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--primary-gold) !important;
+    background: rgba(18, 18, 18, 0.7);
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 50%;
+    backdrop-filter: blur(5px);
+    transition: 0.3s;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background: var(--primary-gold);
+    color: #121212 !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 18px !important;
+    font-weight: bold;
+}
+
+.swiper-pagination-bullet {
+    background: #ccc !important;
+    opacity: 0.6 !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--primary-gold) !important;
+    opacity: 1 !important;
+}
+
+.swiper-pagination {
+    bottom: 0 !important;
+}
